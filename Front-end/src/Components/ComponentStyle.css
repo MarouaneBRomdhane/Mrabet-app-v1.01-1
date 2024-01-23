@@ -1,0 +1,57 @@
+/* Style for validation button fil login component */
+.validation-btn-connexion {
+  margin-top: 10px;
+  border: 0;
+  background-color: #005166;
+  color: #fff7d6;
+  font-size: 20px;
+  margin-left: 305px;
+  transition: background-color 0.3s ease; /* Add a smooth transition effect */
+}
+.validation-btn-connexion:hover {
+  background-color: #24ac82;
+  border: solid 0.5px#F9F871;
+}
+
+/* Style for validation button fil Caisse1 component */
+.validation-btn-caisse1 {
+  margin-top: 10px;
+  border: 0;
+  background-color: #005166;
+  color: #fff7d6;
+  font-size: 20px;
+  transition: background-color 0.3s ease; /* Add a smooth transition effect */
+}
+.validation-btn-caisse1:hover {
+  background-color: #24ac82;
+  border: solid 0.5px#F9F871;
+}
+
+/* Style for validation button for Cheque & Tpe fil modal mta3 Caisse1 component */
+.validation-btn-add-chequeandtpe-modal {
+  margin-left: -15px;
+  border: 0;
+  background-color: #005166;
+  color: #fff7d6;
+  font-size: 18px;
+  transition: background-color 0.3s ease; /* Add a smooth transition effect */
+}
+.validation-btn-add-chequeandtpe-modal:hover {
+  background-color: #24ac82;
+  border: solid 0.5px#F9F871;
+}
+
+/* Style for Sauvgarde button for Cheque & Tpe fil modal mta3 Caisse1 component */
+.sauvegarde-btn-add-chequeandtpe-modal {
+  margin-left: 10px;
+  margin-right: -5px;
+  border: 0;
+  background-color: #005166;
+  color: #fff7d6;
+  font-size: 18px;
+  transition: background-color 0.3s ease; /* Add a smooth transition effect */
+}
+.sauvegarde-btn-add-chequeandtpe-modal:hover {
+  background-color: #24ac82;
+  border: solid 0.5px#F9F871;
+}

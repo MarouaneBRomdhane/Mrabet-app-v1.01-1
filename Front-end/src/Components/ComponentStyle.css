@@ -55,3 +55,8 @@
   background-color: #24ac82;
   border: solid 0.5px#F9F871;
 }
+
+/* Style for accordion mta3 cheque w tpe fel caisse */
+.accordion-caisse {
+  background-color: #005166;
+}

@@ -30,7 +30,7 @@ const Modal1 = ({ caisse }) => {
     const updatedCaisse = {
       Recette: [{ montant }],
       Liquide: { montantLiquide },
-      Cheques: [{ NumeroDeCheque, MontantDeCheque }],
+      Cheques: [...caisse.Cheques],
       TPEs: [{ NumeroDeTransaction, MontantDeTransaction }],
     };
 
@@ -42,22 +42,28 @@ const Modal1 = ({ caisse }) => {
   };
 
   const handleSingleCheque = () => {
-    disptach(
-      updateCaisse1(caisse._id, {
-        ...caisse,
-        Cheques: [...caisse.Cheques, { NumeroDeCheque, MontantDeCheque }],
-      })
-    );
-    setMontantDeCheque(0);
+    if (NumeroDeCheque > 0 && MontantDeCheque > 0) {
+      disptach(
+        updateCaisse1(caisse._id, {
+          ...caisse,
+          Cheques: [...caisse.Cheques, { NumeroDeCheque, MontantDeCheque }],
+        })
+      );
+      setMontantDeCheque(0);
+      setNumeroDeCheque(0);
+    }
   };
 
-  const handleSingleTpe = () =>
-    dispatchEvent(
+  const handleSingleTpe = () => {
+    disptach(
       updateCaisse1(caisse._id, {
         ...caisse,
         TPEs: [...caisse.TPEs, { NumeroDeTransaction, MontantDeTransaction }],
       })
     );
+    setMontantDeTransaction(0);
+    setNumeroDeTransaction(0);
+  };
 
   return (
     <div>
@@ -88,6 +94,7 @@ const Modal1 = ({ caisse }) => {
                 autoFocus
                 style={{ marginTop: "-10px" }}
                 onChange={(e) => setMontant(e.target.value)}
+                value={montant}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -139,6 +146,7 @@ const Modal1 = ({ caisse }) => {
                 style={{ marginLeft: "15px" }}
                 placeholder="N°"
                 onChange={(e) => setNumeroDeCheque(e.target.value)}
+                value={NumeroDeCheque}
               />
             </Form.Label>
 
@@ -152,7 +160,7 @@ const Modal1 = ({ caisse }) => {
               </Button>
             </Col>
           </Row>
-          <div style={{ height: "150px", overflow: "auto" }}>
+          <div style={{ height: "100px", overflow: "auto" }}>
             {Cheques.map((cheque) => (
               <div>
                 montant:{cheque.MontantDeCheque}N°:{cheque.NumeroDeCheque}
@@ -178,6 +186,7 @@ const Modal1 = ({ caisse }) => {
                 placeholder="Montant"
                 style={{ marginLeft: "15px" }}
                 onChange={(e) => setMontantDeTransaction(e.target.value)}
+                value={MontantDeTransaction}
               />
             </Form.Label>
             <Form.Label
@@ -193,6 +202,7 @@ const Modal1 = ({ caisse }) => {
                 style={{ marginLeft: "15px" }}
                 placeholder="N°"
                 onChange={(e) => setNumeroDeTransaction(e.target.value)}
+                value={NumeroDeTransaction}
               />
             </Form.Label>
             {/* Button on the same line to add signle TPE statement*/}
@@ -225,6 +235,7 @@ const Modal1 = ({ caisse }) => {
             </Form.Group>
           </Row>
         </Modal.Body>
+
         <Modal.Footer style={{ backgroundColor: "rgba(0, 126, 127, 0.75)" }}>
           <Button variant="secondary" onClick={handleClose}>
             Close

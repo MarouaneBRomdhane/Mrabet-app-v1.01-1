@@ -32,6 +32,6 @@ exports.updateCaisses1 = async (req, res) => {
       caisse_updated: caisse,
     });
   } catch (error) {
-    res.statu(500).send({ msg: "Echec de l ajout" });
+    res.status(500).send({ msg: "Echec de l ajout" });
   }
 };

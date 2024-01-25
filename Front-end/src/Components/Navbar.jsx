@@ -1,15 +1,16 @@
-import Container from "react-bootstrap/Container";
+import { Container, Button } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import { useSelector } from "react-redux";
 
-function NavBar() {
+function CustomNavBar() {
   const user = useSelector((state) => state.users.user);
   console.log(user);
   return (
-    <Navbar className="bg-dark">
+    <Navbar style={{ backgroundColor: "#01131f" }}>
       <Container>
         <Navbar.Brand href="#home">Navbar with text</Navbar.Brand>
         <Navbar.Toggle />
+        <Button> Achat </Button>
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text style={{ color: "#FFF7D6" }}>
             Signed in as: {user.Name}
@@ -20,4 +21,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default CustomNavBar;

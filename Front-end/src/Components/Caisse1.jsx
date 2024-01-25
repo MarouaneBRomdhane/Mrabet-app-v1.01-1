@@ -7,6 +7,7 @@ import { getCaisses1 } from "../Redux/Actions/Caisse1_Action";
 import { CardText, Row } from "react-bootstrap";
 import CustomNavBar from "./Navbar";
 import Visualizer from "./Visualizer";
+import CaisseEvent from "./CaisseEvent";
 
 function Caisse1(caisse) {
   const dispatch = useDispatch();
@@ -222,6 +223,10 @@ function Caisse1(caisse) {
           ))}
         </Row>
       </div>
+      <div>
+        <CaisseEvent />
+      </div>
+
       <Visualizer />
     </>
   );

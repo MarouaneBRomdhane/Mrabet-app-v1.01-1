@@ -60,3 +60,9 @@
 .accordion-caisse {
   background-color: #005166;
 }
+
+/* Container persoliser 1 */
+.Container-one {
+  width: 90% !important;
+  margin: auto;
+}

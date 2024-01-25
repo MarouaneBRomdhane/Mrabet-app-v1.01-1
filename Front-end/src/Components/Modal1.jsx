@@ -25,13 +25,14 @@ const Modal1 = ({ caisse }) => {
   const Caisses = useSelector((state) => state.caisses1.caisses);
 
   const Cheques = Caisses.find((e) => e._id === caisse._id).Cheques;
+  const Tpes = Caisses.find((e) => e._id === caisse._id).TPEs;
 
   const handleUpdateCaisse1 = () => {
     const updatedCaisse = {
       Recette: [{ montant }],
       Liquide: { montantLiquide },
       Cheques: [...caisse.Cheques],
-      TPEs: [{ NumeroDeTransaction, MontantDeTransaction }],
+      TPEs: [...caisse.TPEs],
     };
 
     disptach(updateCaisse1(caisse._id, updatedCaisse))
@@ -55,14 +56,16 @@ const Modal1 = ({ caisse }) => {
   };
 
   const handleSingleTpe = () => {
-    disptach(
-      updateCaisse1(caisse._id, {
-        ...caisse,
-        TPEs: [...caisse.TPEs, { NumeroDeTransaction, MontantDeTransaction }],
-      })
-    );
-    setMontantDeTransaction(0);
-    setNumeroDeTransaction(0);
+    if (NumeroDeTransaction > 0 && MontantDeTransaction > 0) {
+      disptach(
+        updateCaisse1(caisse._id, {
+          ...caisse,
+          TPEs: [...caisse.TPEs, { NumeroDeTransaction, MontantDeTransaction }],
+        })
+      );
+      setMontantDeTransaction(0);
+      setNumeroDeTransaction(0);
+    }
   };
 
   return (
@@ -78,9 +81,7 @@ const Modal1 = ({ caisse }) => {
           closeButton
           style={{ backgroundColor: "rgba(0, 126, 127, 0.75)" }}
         >
-          <Modal.Title style={{ color: "#FFF7D6" }}>
-            Journée du {Date(24, 0, 2022)}{" "}
-          </Modal.Title>
+          <Modal.Title style={{ color: "#FFF7D6" }}>Journée du</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ backgroundColor: "rgba(0, 126, 127, 0.75)" }}>
           <Form>
@@ -160,10 +161,61 @@ const Modal1 = ({ caisse }) => {
               </Button>
             </Col>
           </Row>
+
+          {/* Champs pour verifier les CHEQUES ajouter avant de valider la journer */}
           <div style={{ height: "100px", overflow: "auto" }}>
             {Cheques.map((cheque) => (
-              <div>
-                montant:{cheque.MontantDeCheque}N°:{cheque.NumeroDeCheque}
+              <div
+                key={cheque._id}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  marginBottom: "8px",
+                  borderBottom: "1px solid #FFF7D6",
+                  paddingBottom: "5px",
+                }}
+              >
+                <div
+                  style={{
+                    marginRight: "5px",
+                    marginTop: "-2px",
+                    fontWeight: "bold",
+                    fontSize: "16px",
+                    width: "80px",
+                  }}
+                >
+                  Montant:
+                </div>
+                <div
+                  style={{
+                    marginTop: "-2px",
+                    fontSize: "16px",
+                    fontWeight: "500",
+                    width: "160px",
+                  }}
+                >
+                  {cheque.MontantDeCheque}
+                </div>
+                <div
+                  style={{
+                    marginTop: "-2px",
+                    marginRight: "5px",
+                    fontSize: "16px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  N°:
+                </div>{" "}
+                <div
+                  style={{
+                    marginTop: "-2px",
+                    marginRight: "5px",
+                    fontSize: "16px",
+                    fontWeight: "500",
+                  }}
+                >
+                  {cheque.NumeroDeCheque}
+                </div>
               </div>
             ))}
           </div>
@@ -215,6 +267,66 @@ const Modal1 = ({ caisse }) => {
               </Button>
             </Col>
           </Row>
+
+          {/*Champs pour verifier les TPEs ajouter avant de valider la journer  */}
+          <div style={{ height: "100px", overflow: "auto" }}>
+            {Tpes.map((tpe) => (
+              <div
+                key={tpe._id}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  marginBottom: "10px",
+                  borderBottom: "1px solid  #FFF7D6",
+                  paddingBottom: "5px",
+                }}
+              >
+                <div
+                  style={{
+                    marginRight: "5px",
+                    marginTop: "-2px",
+                    fontWeight: "bold",
+                    fontSize: "17px",
+                    width: "80px",
+                  }}
+                >
+                  Montant:
+                </div>
+                <div
+                  style={{
+                    marginTop: "-2px",
+                    fontSize: "17px",
+                    fontWeight: "500",
+                    width: "160px",
+                  }}
+                >
+                  {tpe.MontantDeTransaction}
+                </div>
+                <div
+                  style={{
+                    marginTop: "-2px",
+                    marginRight: "5px",
+                    fontSize: "17px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  N°:
+                </div>{" "}
+                <div
+                  style={{
+                    marginTop: "-2px",
+                    marginRight: "5px",
+                    fontSize: "17px",
+                    fontWeight: "500",
+                  }}
+                >
+                  {tpe.NumeroDeTransaction}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Uploader les image scanner des ticket de caisse */}
           <Row>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label
@@ -237,9 +349,7 @@ const Modal1 = ({ caisse }) => {
         </Modal.Body>
 
         <Modal.Footer style={{ backgroundColor: "rgba(0, 126, 127, 0.75)" }}>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
+          {/* boutton pour valider la journée */}
           <Button
             className="sauvegarde-btn-add-chequeandtpe-modal"
             onClick={handleUpdateCaisse1}

@@ -1,4 +1,4 @@
-import { LOGIN } from "../ActionsTypes/User_action_type";
+import { LOGIN, LOGOUT } from "../ActionsTypes/User_action_type";
 
 const initialState = { user: {} };
 
@@ -7,7 +7,9 @@ export const Users_reducer = (state = initialState, { type, payload }) => {
     case LOGIN:
       localStorage.setItem("Token", payload.Token);
       return { ...state, user: payload.User };
-
+    case LOGOUT:
+      localStorage.removeItem("Token");
+      return { ...state, user: {} };
     default:
       return state;
   }

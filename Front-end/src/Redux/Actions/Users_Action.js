@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN } from "../ActionsTypes/User_action_type";
+import { LOGIN, LOGOUT } from "../ActionsTypes/User_action_type";
 
 export const Login_action = (data, Navigate) => async (dispatch) => {
   try {
@@ -10,4 +10,11 @@ export const Login_action = (data, Navigate) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const Log_out = (Navigate) => {
+  Navigate("/");
+  return {
+    type: LOGOUT,
+  };
 };

@@ -10,12 +10,12 @@ import { Login_action } from "../Redux/Actions/Users_Action";
 const Login = () => {
   const [Name, setName] = useState("");
   const [Password, setPassword] = useState("");
-  const dispatch = useDispatch()
-  const Navigate = useNavigate()
+  const dispatch = useDispatch();
+  const Navigate = useNavigate();
 
-  const handleLogin=()=>{
-    dispatch(Login_action({Name, Password}, Navigate))
-  }
+  const handleLogin = () => {
+    dispatch(Login_action({ Name, Password }, Navigate));
+  };
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Card
@@ -33,9 +33,10 @@ const Login = () => {
               display: "flex",
               justifyContent: "center",
               color: "#FFF7D6",
+              fontSize: "3rem",
             }}
           >
-            <h1>Connexion </h1>
+            Connexion
           </Card.Title>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -46,7 +47,7 @@ const Login = () => {
                 type="text"
                 placeholder="Taper votre Nom d'utilisateur"
                 autoFocus
-                onChange={(e)=>setName(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
               />
             </Form.Group>
             <Form.Group
@@ -59,11 +60,13 @@ const Login = () => {
               <Form.Control
                 type="password"
                 placeholder="Taper votre mot de passe"
-                onChange={(e)=>setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
           </Form>
-          <Button className="validation-btn-connexion" onClick={handleLogin}>Se connecter</Button>
+          <Button className="validation-btn-connexion" onClick={handleLogin}>
+            Se connecter
+          </Button>
         </Card.Body>
       </Card>
     </div>

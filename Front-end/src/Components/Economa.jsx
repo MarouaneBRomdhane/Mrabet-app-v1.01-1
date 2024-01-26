@@ -7,12 +7,12 @@ import { getProducts } from "../Redux/Actions/Achat_Action";
 function Economa() {
   const dispatch = useDispatch();
 
-  const products = useSelector((state) => state.Products.products);
-
   useEffect(() => {
     console.log("Products from Redux:", products);
     dispatch(getProducts());
-  }, [dispatch, products]);
+  }, [dispatch]);
+  const products = useSelector((state) => state.Products.products);
+  console.log(products);
 
   return (
     <>

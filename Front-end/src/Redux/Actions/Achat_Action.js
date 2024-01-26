@@ -6,7 +6,7 @@ export const getProducts = () => async (dispatch) => {
     await axios
       .get("http://localhost:8000/achat/get")
       .then((res) =>
-        dispatch({ type: GETPRODUCT, payload: res.data.allAchats })
+        dispatch({ type: GETPRODUCT, payload: res.data.allProducts })
       );
   } catch (error) {
     console.log("Error", error);

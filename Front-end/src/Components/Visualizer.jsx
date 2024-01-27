@@ -1,9 +1,16 @@
 import Card from "react-bootstrap/Card";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCaisses1 } from "../Redux/Actions/Caisse1_Action";
 
 function Visualizer() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCaisses1());
+  }, [dispatch]);
+
   const Caisses = useSelector((state) => state.caisses1.caisses);
+  console.log(Caisses);
 
   const totalTPETransaction = Caisses.reduce((sum, caisse) => {
     if (caisse.TPEs.length > 0) {
@@ -50,7 +57,15 @@ function Visualizer() {
   }, 0);
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", gap: "30px" }}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        gap: "30px",
+        flexWrap: "wrap",
+        marginLeft: "20px",
+      }}
+    >
       {/* Card mta3 totale des recette */}
       <Card
         style={{
@@ -125,7 +140,7 @@ function Visualizer() {
       <Card
         style={{
           width: "28rem",
-          marginTop: "30px",
+          marginTop: "10px",
           backgroundColor: "rgba(0, 126, 127, 0.75)",
           borderRadius: "10px",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
@@ -160,7 +175,7 @@ function Visualizer() {
       <Card
         style={{
           width: "28rem",
-          marginTop: "30px",
+          marginTop: "10px",
           backgroundColor: "rgba(0, 126, 127, 0.75)",
           borderRadius: "10px",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",

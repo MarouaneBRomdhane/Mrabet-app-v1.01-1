@@ -4,9 +4,12 @@ exports.createProduct = async (req, res) => {
   console.log(req.body);
   try {
     const product = new Products(req.body);
-    await product.save();
-    res.status(200).send({ msg: "New Product has been created", product });
+    const savedProduct = await product.save();
+    res
+      .status(201)
+      .send({ msg: "New Product has been created", product: savedProduct });
   } catch (error) {
+    console.error("Failed to create product!", error);
     res.status(500).send({ msg: "Failed to create product!", error });
   }
 };

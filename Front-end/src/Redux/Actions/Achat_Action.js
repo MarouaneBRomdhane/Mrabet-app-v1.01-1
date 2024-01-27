@@ -16,7 +16,7 @@ export const getProducts = () => async (dispatch) => {
 export const addProducts = (data) => async (dispatch) => {
   try {
     await axios
-      .post("http://localhost:8000/achat/get", data)
+      .post("http://localhost:8000/achat/create", data)
       .then((res) => dispatch(getProducts()));
   } catch (error) {
     console.log(error);

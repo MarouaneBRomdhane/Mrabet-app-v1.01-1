@@ -25,6 +25,7 @@ const Login = () => {
           borderRadius: "10px",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         }}
+        className="Card"
       >
         <Card.Body>
           <Card.Title

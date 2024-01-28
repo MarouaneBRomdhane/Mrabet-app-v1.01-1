@@ -15,79 +15,78 @@ function BankCaisse() {
 
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <Row style={{ gap: "30px" }}>
-          {Caisses.map((caisse) => (
-            <Card
-              key={caisse._id}
-              style={{
-                width: "28rem",
-                marginTop: "30px",
-                backgroundColor: "rgba(0, 126, 127, 0.75)",
-                borderRadius: "10px",
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-              }}
-            >
-              <Card.Body>
-                <Card.Title
+      <Row style={{ gap: "30px" }}>
+        {Caisses.map((caisse) => (
+          <Card
+            key={caisse._id}
+            style={{
+              width: "57.875rem",
+              marginTop: "30px",
+              backgroundColor: "rgba(0, 126, 127, 0.75)",
+              borderRadius: "10px",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            }}
+            className="Card"
+          >
+            <Card.Body>
+              <Card.Title
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  color: "#FFF7D6",
+                  fontSize: "40px",
+                  fontWeight: "700",
+                }}
+              >
+                {caisse.Title}
+              </Card.Title>
+              <div style={{ display: "flex" }}>
+                <Card.Text
                   style={{
-                    display: "flex",
-                    justifyContent: "center",
                     color: "#FFF7D6",
-                    fontSize: "40px",
-                    fontWeight: "700",
+                    fontSize: "25px",
+                    fontWeight: "bold",
+                    width: "110px",
                   }}
                 >
-                  {caisse.Title}
-                </Card.Title>
-                <div style={{ display: "flex" }}>
-                  <Card.Text
-                    style={{
-                      color: "#FFF7D6",
-                      fontSize: "25px",
-                      fontWeight: "bold",
-                      width: "110px",
-                    }}
-                  >
-                    Montant:
-                  </Card.Text>
-                  <CardText
-                    style={{
-                      color: "#FFF7D6",
-                      fontSize: "25px",
-                      marginLeft: "10px",
-                    }}
-                  >
-                    {caisse.Montant}
-                  </CardText>
-                </div>
-                <div style={{ display: "flex" }}>
-                  <Card.Text
-                    style={{
-                      color: "#FFF7D6",
-                      fontSize: "25px",
-                      fontWeight: "bold",
-                      width: "80px",
-                    }}
-                  >
-                    Motif:
-                  </Card.Text>
-                  <CardText
-                    style={{
-                      color: "#FFF7D6",
-                      fontSize: "25px",
-                      marginLeft: "10px",
-                    }}
-                  >
-                    {caisse.Motif}
-                  </CardText>
-                </div>
-                <BankCaisseModal caisse={caisse} />
-              </Card.Body>
-            </Card>
-          ))}
-        </Row>
-      </div>
+                  Montant:
+                </Card.Text>
+                <CardText
+                  style={{
+                    color: "#FFF7D6",
+                    fontSize: "25px",
+                    marginLeft: "10px",
+                  }}
+                >
+                  {caisse.Montant}
+                </CardText>
+              </div>
+              <div style={{ display: "flex" }}>
+                <Card.Text
+                  style={{
+                    color: "#FFF7D6",
+                    fontSize: "25px",
+                    fontWeight: "bold",
+                    width: "80px",
+                  }}
+                >
+                  Motif:
+                </Card.Text>
+                <CardText
+                  style={{
+                    color: "#FFF7D6",
+                    fontSize: "25px",
+                    marginLeft: "10px",
+                  }}
+                >
+                  {caisse.Motif}
+                </CardText>
+              </div>
+              <BankCaisseModal caisse={caisse} />
+            </Card.Body>
+          </Card>
+        ))}
+      </Row>
     </>
   );
 }

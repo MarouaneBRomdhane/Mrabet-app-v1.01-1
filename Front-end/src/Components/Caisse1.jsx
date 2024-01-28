@@ -20,7 +20,20 @@ function Caisse1(caisse) {
 
   return (
     <>
-      <CustomNavBar />
+      <div>
+        <CustomNavBar />
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "100px",
+          marginBottom: "-50px",
+        }}
+      >
+        <Visualizer />
+      </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Row style={{ gap: "30px" }}>
           {Caisses.map((caisse) => (
@@ -33,6 +46,7 @@ function Caisse1(caisse) {
                 borderRadius: "10px",
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
               }}
+              className="Card"
             >
               <Card.Body>
                 <Card.Title
@@ -229,16 +243,15 @@ function Caisse1(caisse) {
       <div
         style={{
           display: "flex",
-          gap: "550px",
+          flexDirection: "row",
           justifyContent: "center",
-          marginBottom: "100px",
         }}
       >
-        <CaisseEvent />
-        <BankCaisse />
+        <div style={{ display: "flex", gap: "57px" }}>
+          <CaisseEvent />
+          <BankCaisse />
+        </div>
       </div>
-
-      <Visualizer />
     </>
   );
 }

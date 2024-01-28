@@ -32,6 +32,9 @@ const AddProduct = () => {
     };
     dispatch(addProducts(newProduct));
     handleClose();
+    setName("");
+    setQuantity(0);
+    setPrice(0);
   };
 
   return (
@@ -114,10 +117,7 @@ const AddProduct = () => {
 
         <Modal.Footer style={{ backgroundColor: "rgba(0, 126, 127, 0.75)" }}>
           {/* boutton pour valider la journée */}
-          <Button
-            className="sauvegarde-btn-add-chequeandtpe-modal"
-            onClick={handleAddProduct}
-          >
+          <Button className="BTN-CHQTPE" onClick={handleAddProduct}>
             Sauvegarder
           </Button>
         </Modal.Footer>

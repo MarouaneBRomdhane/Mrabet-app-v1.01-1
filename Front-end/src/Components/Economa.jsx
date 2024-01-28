@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../Redux/Actions/Achat_Action";
@@ -28,6 +28,7 @@ function Economa() {
                 borderRadius: "10px",
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
               }}
+              className="Card"
             >
               <Card.Body>
                 <Card.Title
@@ -62,7 +63,7 @@ function Economa() {
                           marginTop: "auto",
                           fontSize: "30px",
                           fontWeight: "500",
-                          width: "50%",
+                          width: "32%",
                           color: "#FFF7D6",
                           marginLeft: "10px",
                         }}
@@ -70,54 +71,58 @@ function Economa() {
                       >
                         {product.Name}
                       </div>
-                      <div
-                        style={{
-                          marginTop: "auto",
-                          fontSize: "30px",
-                          fontWeight: "600",
-                          width: "10%",
-                          color: "#FFF7D6",
-                        }}
-                        className="divtextmta3lesproduit"
-                      >
-                        Qte:
-                      </div>
+                      <div style={{ width: "30%", display: "flex" }}>
+                        <div
+                          style={{
+                            marginTop: "auto",
+                            fontSize: "30px",
+                            fontWeight: "600",
 
-                      <div
-                        style={{
-                          marginTop: "auto",
-                          fontSize: "30px",
-                          fontWeight: "400",
-                          width: "48%",
-                          color: "#FFF7D6",
-                        }}
-                        className="divtextmta3lesproduit"
-                      >
-                        {product.Quantity}
+                            color: "#FFF7D6",
+                          }}
+                          className="divtextmta3lesproduit"
+                        >
+                          Qte:
+                        </div>
+
+                        <div
+                          style={{
+                            marginTop: "auto",
+                            fontSize: "30px",
+                            fontWeight: "400",
+                            color: "#FFF7D6",
+                            marginLeft: "10px",
+                          }}
+                          className="divtextmta3lesproduit"
+                        >
+                          {product.Quantity}
+                        </div>
                       </div>
-                      <div
-                        style={{
-                          marginTop: "auto",
-                          fontSize: "30px",
-                          fontWeight: "500",
-                          color: "#FFF7D6",
-                          marginRight: "10px",
-                        }}
-                        className="divtextmta3lesproduit"
-                      >
-                        Prix:
-                      </div>
-                      <div
-                        style={{
-                          marginTop: "auto",
-                          fontSize: "30px",
-                          fontWeight: "400",
-                          color: "#FFF7D6",
-                          marginRight: "10px",
-                        }}
-                        className="divtextmta3lesproduit"
-                      >
-                        {product.price}
+                      <div style={{ width: "30%", display: "flex" }}>
+                        <div
+                          style={{
+                            marginTop: "auto",
+                            fontSize: "30px",
+                            fontWeight: "500",
+                            color: "#FFF7D6",
+                            marginRight: "10px",
+                          }}
+                          className="divtextmta3lesproduit"
+                        >
+                          Prix:
+                        </div>
+                        <div
+                          style={{
+                            marginTop: "auto",
+                            fontSize: "30px",
+                            fontWeight: "400",
+                            color: "#FFF7D6",
+                            marginLeft: "-6px",
+                          }}
+                          className="divtextmta3lesproduit"
+                        >
+                          {product.Price}
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -127,6 +132,7 @@ function Economa() {
           </div>
         </Col>
         <Col className="col-6">
+          <div style={{ marginTop: "103px" }}></div>
           <Visualizer />
         </Col>
       </Row>

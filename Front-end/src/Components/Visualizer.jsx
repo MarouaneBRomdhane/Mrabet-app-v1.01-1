@@ -78,6 +78,7 @@ function Visualizer() {
           marginTop: "10px",
           marginBottom: "20px",
         }}
+        className="Card"
       >
         <Card.Body>
           <Card.Title
@@ -116,6 +117,7 @@ function Visualizer() {
           height: "150px",
           marginBottom: "20px",
         }}
+        className="Card"
       >
         <Card.Body>
           <Card.Title
@@ -154,6 +156,7 @@ function Visualizer() {
           height: "150px",
           marginBottom: "20px",
         }}
+        className="Card"
       >
         <Card.Body>
           <Card.Title
@@ -192,6 +195,7 @@ function Visualizer() {
           height: "150px",
           marginBottom: "20px",
         }}
+        className="Card"
       >
         <Card.Body>
           <Card.Title

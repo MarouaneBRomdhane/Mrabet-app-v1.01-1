@@ -16,32 +16,55 @@ function CaisseEvent(caisse) {
 
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <Row style={{ gap: "30px" }}>
-          {Caisses.map((caisse) => (
-            <Card
-              key={caisse._id}
-              style={{
-                width: "28rem",
-                marginTop: "30px",
-                backgroundColor: "rgba(0, 126, 127, 0.75)",
-                borderRadius: "10px",
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-              }}
-            >
-              <Card.Body>
-                <Card.Title
+      <Row style={{ gap: "30px" }}>
+        {Caisses.map((caisse) => (
+          <Card
+            key={caisse._id}
+            style={{
+              width: "57.875rem",
+              marginTop: "30px",
+              backgroundColor: "rgba(0, 126, 127, 0.75)",
+              borderRadius: "10px",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            }}
+            className="Card"
+          >
+            <Card.Body>
+              <Card.Title
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  color: "#FFF7D6",
+                  fontSize: "40px",
+                  fontWeight: "700",
+                }}
+              >
+                {caisse.Title}
+              </Card.Title>
+              {/*  div mta3 Ligne Recette */}
+              <div style={{ display: "flex" }}>
+                <Card.Text
                   style={{
-                    display: "flex",
-                    justifyContent: "center",
                     color: "#FFF7D6",
-                    fontSize: "40px",
-                    fontWeight: "700",
+                    fontSize: "25px",
+                    fontWeight: "bold",
+                    width: "100px",
                   }}
                 >
-                  {caisse.Title}
-                </Card.Title>
-                {/*  div mta3 Ligne Recette */}
+                  Recette:
+                </Card.Text>
+                <CardText
+                  style={{
+                    color: "#FFF7D6",
+                    fontSize: "25px",
+                    marginLeft: "10px",
+                  }}
+                >
+                  {caisse.Recette[0].montant}
+                </CardText>
+              </div>
+              {/* RECETTE trander ki luser iselecti fel modal Espece comme type donc el valeur twali >0 */}
+              {caisse.Liquide.montantLiquide > 0 && (
                 <div style={{ display: "flex" }}>
                   <Card.Text
                     style={{
@@ -51,190 +74,166 @@ function CaisseEvent(caisse) {
                       width: "100px",
                     }}
                   >
-                    Recette:
+                    Espece:
                   </Card.Text>
-                  <CardText
+                  <Card.Text
                     style={{
                       color: "#FFF7D6",
                       fontSize: "25px",
                       marginLeft: "10px",
                     }}
                   >
-                    {caisse.Recette[0].montant}
-                  </CardText>
+                    {caisse.Liquide.montantLiquide}
+                  </Card.Text>
                 </div>
-                {/* RECETTE trander ki luser iselecti fel modal Espece comme type donc el valeur twali >0 */}
-                {caisse.Liquide.montantLiquide > 0 && (
-                  <div style={{ display: "flex" }}>
-                    <Card.Text
-                      style={{
-                        color: "#FFF7D6",
-                        fontSize: "25px",
-                        fontWeight: "bold",
-                        width: "100px",
-                      }}
-                    >
-                      Espece:
-                    </Card.Text>
-                    <Card.Text
-                      style={{
-                        color: "#FFF7D6",
-                        fontSize: "25px",
-                        marginLeft: "10px",
-                      }}
-                    >
-                      {caisse.Liquide.montantLiquide}
-                    </Card.Text>
-                  </div>
-                )}
-                {/* Cheque ACCORDION irander ki luser iselecti fel modal CHEQUE comme type donc el [].length twali >0 */}
-                {caisse.Cheques.length > 0 && (
-                  <div>
-                    {/* accordion for CHEQUE statemens */}
-                    <Accordion>
-                      <Accordion.Item eventKey="0">
-                        <Accordion.Header>Cheque stamtements</Accordion.Header>
-                        <Accordion.Body>
-                          <div style={{ height: "100px", overflow: "auto" }}>
-                            {caisse.Cheques.map((cheque) => (
+              )}
+              {/* Cheque ACCORDION irander ki luser iselecti fel modal CHEQUE comme type donc el [].length twali >0 */}
+              {caisse.Cheques.length > 0 && (
+                <div>
+                  {/* accordion for CHEQUE statemens */}
+                  <Accordion>
+                    <Accordion.Item eventKey="0">
+                      <Accordion.Header>Cheque stamtements</Accordion.Header>
+                      <Accordion.Body>
+                        <div style={{ height: "100px", overflow: "auto" }}>
+                          {caisse.Cheques.map((cheque) => (
+                            <div
+                              key={cheque._id}
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                marginBottom: "10px",
+                                borderBottom:
+                                  "1px solid rgba(0, 126, 127, 0.75)",
+                                paddingBottom: "5px",
+                              }}
+                            >
                               <div
-                                key={cheque._id}
                                 style={{
-                                  display: "flex",
-                                  flexDirection: "row",
-                                  marginBottom: "10px",
-                                  borderBottom:
-                                    "1px solid rgba(0, 126, 127, 0.75)",
-                                  paddingBottom: "5px",
+                                  marginRight: "5px",
+                                  marginTop: "-5px",
+                                  fontWeight: "bold",
+                                  fontSize: "17px",
+                                  width: "80px",
                                 }}
                               >
-                                <div
-                                  style={{
-                                    marginRight: "5px",
-                                    marginTop: "-5px",
-                                    fontWeight: "bold",
-                                    fontSize: "17px",
-                                    width: "80px",
-                                  }}
-                                >
-                                  Montant:
-                                </div>
-                                <div
-                                  style={{
-                                    marginTop: "-5px",
-                                    fontSize: "17px",
-                                    fontWeight: "500",
-                                    width: "120px",
-                                  }}
-                                >
-                                  {cheque.MontantDeCheque}
-                                </div>
-                                <div
-                                  style={{
-                                    marginTop: "-5px",
-                                    marginRight: "5px",
-                                    fontSize: "17px",
-                                    fontWeight: "bold",
-                                  }}
-                                >
-                                  N°:
-                                </div>
-                                <div
-                                  style={{
-                                    marginTop: "-5px",
-                                    marginRight: "5px",
-                                    fontSize: "17px",
-                                    fontWeight: "500",
-                                  }}
-                                >
-                                  {cheque.NumeroDeCheque}
-                                </div>
+                                Montant:
                               </div>
-                            ))}
-                          </div>
-                        </Accordion.Body>
-                      </Accordion.Item>
-                    </Accordion>
-                  </div>
-                )}
-                {/* TPE ACCORDION irander ki luser iselecti fel modal CHEQUE comme type donc el [].length twali >0 */}
-                {caisse.TPEs.length > 0 && (
-                  <div>
-                    {/* accordion for TPE statemens */}
-                    <Accordion style={{ marginTop: "5px" }}>
-                      <Accordion.Item eventKey="0">
-                        <Accordion.Header>TPE stamtements</Accordion.Header>
-                        <Accordion.Body>
-                          <div style={{ height: "100px", overflow: "auto" }}>
-                            {caisse.TPEs.map((tpe) => (
                               <div
-                                key={tpe._id}
                                 style={{
-                                  display: "flex",
-                                  flexDirection: "row",
-                                  marginBottom: "10px",
-                                  borderBottom:
-                                    "1px solid rgba(0, 126, 127, 0.75)",
-                                  paddingBottom: "5px",
+                                  marginTop: "-5px",
+                                  fontSize: "17px",
+                                  fontWeight: "500",
+                                  width: "120px",
                                 }}
                               >
-                                <div
-                                  style={{
-                                    marginRight: "5px",
-                                    marginTop: "-5px",
-                                    fontWeight: "bold",
-                                    fontSize: "17px",
-                                    width: "80px",
-                                  }}
-                                >
-                                  Montant:
-                                </div>
-                                <div
-                                  style={{
-                                    marginTop: "-5px",
-                                    fontSize: "17px",
-                                    fontWeight: "500",
-                                    width: "120px",
-                                  }}
-                                >
-                                  {tpe.MontantDeTransaction}{" "}
-                                  {/* Corrected variable name */}
-                                </div>
-                                <div
-                                  style={{
-                                    marginTop: "-5px",
-                                    marginRight: "5px",
-                                    fontSize: "17px",
-                                    fontWeight: "bold",
-                                  }}
-                                >
-                                  N°:
-                                </div>
-                                <div
-                                  style={{
-                                    marginTop: "-5px",
-                                    marginRight: "5px",
-                                    fontSize: "17px",
-                                    fontWeight: "500",
-                                  }}
-                                >
-                                  {tpe.NumeroDeTransaction}{" "}
-                                  {/* Corrected variable name */}
-                                </div>
+                                {cheque.MontantDeCheque}
                               </div>
-                            ))}
-                          </div>
-                        </Accordion.Body>
-                      </Accordion.Item>
-                    </Accordion>
-                  </div>
-                )}
-                <ModalEvent caisse={caisse} />
-              </Card.Body>
-            </Card>
-          ))}
-        </Row>
-      </div>
+                              <div
+                                style={{
+                                  marginTop: "-5px",
+                                  marginRight: "5px",
+                                  fontSize: "17px",
+                                  fontWeight: "bold",
+                                }}
+                              >
+                                N°:
+                              </div>
+                              <div
+                                style={{
+                                  marginTop: "-5px",
+                                  marginRight: "5px",
+                                  fontSize: "17px",
+                                  fontWeight: "500",
+                                }}
+                              >
+                                {cheque.NumeroDeCheque}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </Accordion.Body>
+                    </Accordion.Item>
+                  </Accordion>
+                </div>
+              )}
+              {/* TPE ACCORDION irander ki luser iselecti fel modal CHEQUE comme type donc el [].length twali >0 */}
+              {caisse.TPEs.length > 0 && (
+                <div>
+                  {/* accordion for TPE statemens */}
+                  <Accordion style={{ marginTop: "5px" }}>
+                    <Accordion.Item eventKey="0">
+                      <Accordion.Header>TPE stamtements</Accordion.Header>
+                      <Accordion.Body>
+                        <div style={{ height: "100px", overflow: "auto" }}>
+                          {caisse.TPEs.map((tpe) => (
+                            <div
+                              key={tpe._id}
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                marginBottom: "10px",
+                                borderBottom:
+                                  "1px solid rgba(0, 126, 127, 0.75)",
+                                paddingBottom: "5px",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  marginRight: "5px",
+                                  marginTop: "-5px",
+                                  fontWeight: "bold",
+                                  fontSize: "17px",
+                                  width: "80px",
+                                }}
+                              >
+                                Montant:
+                              </div>
+                              <div
+                                style={{
+                                  marginTop: "-5px",
+                                  fontSize: "17px",
+                                  fontWeight: "500",
+                                  width: "120px",
+                                }}
+                              >
+                                {tpe.MontantDeTransaction}{" "}
+                                {/* Corrected variable name */}
+                              </div>
+                              <div
+                                style={{
+                                  marginTop: "-5px",
+                                  marginRight: "5px",
+                                  fontSize: "17px",
+                                  fontWeight: "bold",
+                                }}
+                              >
+                                N°:
+                              </div>
+                              <div
+                                style={{
+                                  marginTop: "-5px",
+                                  marginRight: "5px",
+                                  fontSize: "17px",
+                                  fontWeight: "500",
+                                }}
+                              >
+                                {tpe.NumeroDeTransaction}{" "}
+                                {/* Corrected variable name */}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </Accordion.Body>
+                    </Accordion.Item>
+                  </Accordion>
+                </div>
+              )}
+              <ModalEvent caisse={caisse} />
+            </Card.Body>
+          </Card>
+        ))}
+      </Row>
     </>
   );
 }

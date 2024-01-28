@@ -12,6 +12,8 @@ const AddProduct = () => {
   const [Price, setPrice] = useState(0);
   const [Quantity, setQuantity] = useState(0);
   const [Facture, setFacture] = useState("");
+  const [Unity, setUnity] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
 
   const dispatch = useDispatch();
 
@@ -31,6 +33,7 @@ const AddProduct = () => {
       Quantity: Quantity,
       Price: Price,
       Facture: Facture,
+      Unity: selectedOption,
     };
     dispatch(addProducts(newProduct));
     handleClose();
@@ -38,6 +41,39 @@ const AddProduct = () => {
     setQuantity(0);
     setPrice(0);
     setFacture("");
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const img = new Image();
+        img.src = e.target.result;
+
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+
+          // Set the canvas dimensions to the image dimensions
+          canvas.width = img.width;
+          canvas.height = img.height;
+
+          // Draw the image onto the canvas
+          ctx.drawImage(img, 0, 0);
+
+          // Convert the canvas content to a data URI with aggressive compression (adjust as needed)
+          const dataUri = canvas.toDataURL("image/jpeg", 0.6);
+
+          setFacture(dataUri);
+          console.log(dataUri);
+        };
+      };
+
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -83,6 +119,16 @@ const AddProduct = () => {
                 onChange={(e) => setQuantity(e.target.value)}
               />
             </Form.Group>
+            <Form.Select
+              aria-label="Default select example"
+              onChange={(e) => setSelectedOption(e.target.value)}
+              value={selectedOption}
+            >
+              <option>Veuillez sélectionner le type d'unité</option>
+              <option value="Lt">Litre</option>
+              <option value="Kg">Kg</option>
+              <option value="Pck">Pack</option>
+            </Form.Select>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label style={{ color: "#FFF7D6", fontSize: "25px" }}>
                 Prix
@@ -114,7 +160,7 @@ const AddProduct = () => {
                 autoFocus
                 style={{ marginTop: "-10px" }}
                 value={Facture}
-                onchange={(e) => setFacture(e.target.value)}
+                onChange={(e) => handleImageChange(e)}
               />
             </Form.Group>
           </Form>

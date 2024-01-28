@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../Redux/Actions/Achat_Action";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Carousel, Modal } from "react-bootstrap"; // Import Carousel and Modal from react-bootstrap
 import Visualizer from "./Visualizer";
 import AddProduct from "./AddProduct";
 
@@ -14,6 +14,14 @@ function Economa() {
     dispatch(getProducts());
   }, [dispatch]);
   const products = useSelector((state) => state.Products.products);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  // Function to handle image click and show modal
+  const handleImageClick = (imageURL) => {
+    setSelectedImage(imageURL);
+    setShowModal(true);
+  };
 
   return (
     <>
@@ -96,6 +104,7 @@ function Economa() {
                           className="divtextmta3lesproduit"
                         >
                           {product.Quantity}
+                          {product.Unity}
                         </div>
                       </div>
                       <div style={{ width: "30%", display: "flex" }}>
@@ -118,10 +127,11 @@ function Economa() {
                             fontWeight: "400",
                             color: "#FFF7D6",
                             marginLeft: "-6px",
+                            marginRight: "5px",
                           }}
                           className="divtextmta3lesproduit"
                         >
-                          {product.Price}
+                          {product.Price}Dt
                         </div>
                       </div>
                     </div>
@@ -134,13 +144,47 @@ function Economa() {
         <Col className="col-6">
           <div style={{ marginTop: "103px" }}></div>
           <Visualizer />
+          <div style={{ marginTop: "103px" }}>
+            {/* Add the Carousel here */}
+            <Carousel>
+              {products.map((product) => (
+                <Carousel.Item key={product._id}>
+                  <img
+                    className="d-block w-100"
+                    src={product.Facture}
+                    onClick={() => handleImageClick(product.Facture)}
+                    style={{ cursor: "pointer" }}
+                  />
+                  {/* You can add additional content for each carousel item if needed */}
+                  <Carousel.Caption>
+                    <h3>{product.Name}</h3>
+                  </Carousel.Caption>
+                </Carousel.Item>
+              ))}
+            </Carousel>
+          </div>
         </Col>
       </Row>
+      <Modal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        size="xl"
+        dialogClassName="modal-90w" // Custom class for 90% width
+      >
+        <Modal.Body>
+          <img
+            src={selectedImage}
+            alt="Selected Image"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+            }}
+          />
+        </Modal.Body>
+      </Modal>
     </>
   );
 }
 
 export default Economa;
-
-// {products &&
-//   products.map((product) => ()}

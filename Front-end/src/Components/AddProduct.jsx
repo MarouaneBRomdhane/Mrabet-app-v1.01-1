@@ -11,6 +11,7 @@ const AddProduct = () => {
   const [Name, setName] = useState("");
   const [Price, setPrice] = useState(0);
   const [Quantity, setQuantity] = useState(0);
+  const [Facture, setFacture] = useState("");
 
   const dispatch = useDispatch();
 
@@ -29,12 +30,14 @@ const AddProduct = () => {
       Name: Name,
       Quantity: Quantity,
       Price: Price,
+      Facture: Facture,
     };
     dispatch(addProducts(newProduct));
     handleClose();
     setName("");
     setQuantity(0);
     setPrice(0);
+    setFacture("");
   };
 
   return (
@@ -110,6 +113,8 @@ const AddProduct = () => {
                 placeholder="Inserer le montant du ticket de caisse"
                 autoFocus
                 style={{ marginTop: "-10px" }}
+                value={Facture}
+                onchange={(e) => setFacture(e.target.value)}
               />
             </Form.Group>
           </Form>

@@ -37,7 +37,7 @@ const AddProduct = () => {
   return (
     <div>
       {/* button to open modal */}
-      <Button onClick={handleShow} className="validation-btn-caisse1">
+      <Button onClick={handleShow} className="BTN">
         Ajouter un Achat
       </Button>
 

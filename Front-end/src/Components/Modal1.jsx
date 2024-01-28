@@ -71,7 +71,7 @@ const Modal1 = ({ caisse }) => {
   return (
     <div>
       {/* button to open modal */}
-      <Button onClick={handleShow} className="validation-btn-caisse1">
+      <Button onClick={handleShow} className="BTN">
         Editer journée
       </Button>
 
@@ -153,10 +153,7 @@ const Modal1 = ({ caisse }) => {
 
             {/* Button on the same line to add signle CHEQUE statement*/}
             <Col md={2} sm={2} ml={1} className="d-flex align-items-center">
-              <Button
-                className="validation-btn-add-chequeandtpe-modal"
-                onClick={handleSingleCheque}
-              >
+              <Button className="BTN-CHQTPE" onClick={handleSingleCheque}>
                 Ajouter
               </Button>
             </Col>
@@ -259,10 +256,7 @@ const Modal1 = ({ caisse }) => {
             </Form.Label>
             {/* Button on the same line to add signle TPE statement*/}
             <Col md={2} sm={2} className="d-flex align-items-center">
-              <Button
-                className="validation-btn-add-chequeandtpe-modal"
-                onClick={handleSingleTpe}
-              >
+              <Button className="BTN-CHQTPE" onClick={handleSingleTpe}>
                 Ajouter
               </Button>
             </Col>
@@ -350,10 +344,7 @@ const Modal1 = ({ caisse }) => {
 
         <Modal.Footer style={{ backgroundColor: "rgba(0, 126, 127, 0.75)" }}>
           {/* boutton pour valider la journée */}
-          <Button
-            className="sauvegarde-btn-add-chequeandtpe-modal"
-            onClick={handleUpdateCaisse1}
-          >
+          <Button className="BTN" onClick={handleUpdateCaisse1}>
             Sauvegareder
           </Button>
         </Modal.Footer>

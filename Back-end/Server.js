@@ -5,6 +5,7 @@ const CaisseRouter = require("./Routers/Caisse1_Router");
 const CaisseEventRouter = require("./Routers/Caisse_event_Router");
 const cors = require("cors");
 const ProductstRouter = require("./Routers/Achat_Router");
+const BankCaisseRouter = require("./Routers/Bank_caisse_Router");
 const app = express();
 const port = 8000;
 
@@ -20,4 +21,5 @@ app.use("/user", UserRouter);
 app.use("/caisse", CaisseRouter);
 app.use("/caisseEvent", CaisseEventRouter);
 app.use("/achat", ProductstRouter);
+app.use("/bank", BankCaisseRouter);
 app.listen(port, console.log("Server is runing at port 8000"));

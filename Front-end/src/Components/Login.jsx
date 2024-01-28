@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
-import "./ComponentStyle.css";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Login_action } from "../Redux/Actions/Users_Action";
@@ -64,7 +63,7 @@ const Login = () => {
               />
             </Form.Group>
           </Form>
-          <Button className="validation-btn-connexion" onClick={handleLogin}>
+          <Button className="BTN-LOGIN" onClick={handleLogin}>
             Se connecter
           </Button>
         </Card.Body>

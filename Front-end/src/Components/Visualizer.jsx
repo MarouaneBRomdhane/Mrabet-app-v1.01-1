@@ -63,7 +63,8 @@ function Visualizer() {
         justifyContent: "center",
         gap: "30px",
         flexWrap: "wrap",
-        marginLeft: "20px",
+        marginBottom: "30px",
+        marginTop: "-80px",
       }}
     >
       {/* Card mta3 totale des recette */}
@@ -73,7 +74,9 @@ function Visualizer() {
           marginTop: "30px",
           backgroundColor: "rgba(0, 126, 127, 0.75)",
           borderRadius: "10px",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+          height: "150px",
+          marginTop: "10px",
+          marginBottom: "20px",
         }}
       >
         <Card.Body>
@@ -82,9 +85,11 @@ function Visualizer() {
               display: "flex",
               justifyContent: "center",
               color: "#FFF7D6",
+              fontSize: "30px",
+              fontWeight: "700",
             }}
           >
-            <h2>Total des recette de caisse</h2>
+            Total des recette de caisse
           </Card.Title>
           <Card.Text
             style={{
@@ -105,10 +110,11 @@ function Visualizer() {
       <Card
         style={{
           width: "28rem",
-          marginTop: "30px",
+          marginTop: "10px",
           backgroundColor: "rgba(0, 126, 127, 0.75)",
           borderRadius: "10px",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+          height: "150px",
+          marginBottom: "20px",
         }}
       >
         <Card.Body>
@@ -117,9 +123,11 @@ function Visualizer() {
               display: "flex",
               justifyContent: "center",
               color: "#FFF7D6",
+              fontSize: "30px",
+              fontWeight: "700",
             }}
           >
-            <h2> Liquide disponible en caisse</h2>
+            Liquide disponible en caisse
           </Card.Title>
           <Card.Text
             style={{
@@ -143,7 +151,8 @@ function Visualizer() {
           marginTop: "10px",
           backgroundColor: "rgba(0, 126, 127, 0.75)",
           borderRadius: "10px",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+          height: "150px",
+          marginBottom: "20px",
         }}
       >
         <Card.Body>
@@ -152,9 +161,11 @@ function Visualizer() {
               display: "flex",
               justifyContent: "center",
               color: "#FFF7D6",
+              fontSize: "30px",
+              fontWeight: "700",
             }}
           >
-            <h2> Total des Cheques</h2>
+            Total des Cheques
           </Card.Title>
           <Card.Text
             style={{
@@ -178,7 +189,8 @@ function Visualizer() {
           marginTop: "10px",
           backgroundColor: "rgba(0, 126, 127, 0.75)",
           borderRadius: "10px",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+          height: "150px",
+          marginBottom: "20px",
         }}
       >
         <Card.Body>
@@ -187,9 +199,11 @@ function Visualizer() {
               display: "flex",
               justifyContent: "center",
               color: "#FFF7D6",
+              fontSize: "30px",
+              fontWeight: "700",
             }}
           >
-            <h2> Total des transaction TPE</h2>
+            Total des transaction TPE
           </Card.Title>
           <Card.Text
             style={{

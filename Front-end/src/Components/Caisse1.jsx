@@ -8,6 +8,7 @@ import { CardText, Row } from "react-bootstrap";
 import CustomNavBar from "./Navbar";
 import Visualizer from "./Visualizer";
 import CaisseEvent from "./CaisseEvent";
+import BankCaisse from "./BankCaisse";
 
 function Caisse1(caisse) {
   const dispatch = useDispatch();
@@ -39,9 +40,11 @@ function Caisse1(caisse) {
                     display: "flex",
                     justifyContent: "center",
                     color: "#FFF7D6",
+                    fontSize: "40px",
+                    fontWeight: "700",
                   }}
                 >
-                  <h1>{caisse.Title} </h1>
+                  {caisse.Title}
                 </Card.Title>
                 <div style={{ display: "flex" }}>
                   <Card.Text
@@ -223,8 +226,16 @@ function Caisse1(caisse) {
           ))}
         </Row>
       </div>
-      <div>
+      <div
+        style={{
+          display: "flex",
+          gap: "550px",
+          justifyContent: "center",
+          marginBottom: "100px",
+        }}
+      >
         <CaisseEvent />
+        <BankCaisse />
       </div>
 
       <Visualizer />

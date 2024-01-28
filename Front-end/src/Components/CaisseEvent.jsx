@@ -35,39 +35,35 @@ function CaisseEvent(caisse) {
                     display: "flex",
                     justifyContent: "center",
                     color: "#FFF7D6",
+                    fontSize: "40px",
+                    fontWeight: "700",
                   }}
                 >
-                  <h1>{caisse.Title} </h1>
+                  {caisse.Title}
                 </Card.Title>
-
-                {/* RECETTE trander ki tebda valeurha >0 */}
-                {caisse.Liquide.montantLiquide > 0 && (
-                  // div mta3 Ligne Recette
-                  <div style={{ display: "flex" }}>
-                    <Card.Text
-                      style={{
-                        color: "#FFF7D6",
-                        fontSize: "25px",
-                        fontWeight: "bold",
-                        width: "100px",
-                      }}
-                    >
-                      Recette:
-                    </Card.Text>
-                    <CardText
-                      style={{
-                        color: "#FFF7D6",
-                        fontSize: "25px",
-                        marginLeft: "10px",
-                      }}
-                    >
-                      {caisse.Recette[0].montant}
-                    </CardText>
-                  </div>
-                )}
-
+                {/*  div mta3 Ligne Recette */}
+                <div style={{ display: "flex" }}>
+                  <Card.Text
+                    style={{
+                      color: "#FFF7D6",
+                      fontSize: "25px",
+                      fontWeight: "bold",
+                      width: "100px",
+                    }}
+                  >
+                    Recette:
+                  </Card.Text>
+                  <CardText
+                    style={{
+                      color: "#FFF7D6",
+                      fontSize: "25px",
+                      marginLeft: "10px",
+                    }}
+                  >
+                    {caisse.Recette[0].montant}
+                  </CardText>
+                </div>
                 {/* RECETTE trander ki luser iselecti fel modal Espece comme type donc el valeur twali >0 */}
-
                 {caisse.Liquide.montantLiquide > 0 && (
                   <div style={{ display: "flex" }}>
                     <Card.Text
@@ -91,7 +87,6 @@ function CaisseEvent(caisse) {
                     </Card.Text>
                   </div>
                 )}
-
                 {/* Cheque ACCORDION irander ki luser iselecti fel modal CHEQUE comme type donc el [].length twali >0 */}
                 {caisse.Cheques.length > 0 && (
                   <div>
@@ -162,7 +157,6 @@ function CaisseEvent(caisse) {
                     </Accordion>
                   </div>
                 )}
-
                 {/* TPE ACCORDION irander ki luser iselecti fel modal CHEQUE comme type donc el [].length twali >0 */}
                 {caisse.TPEs.length > 0 && (
                   <div>
@@ -235,7 +229,6 @@ function CaisseEvent(caisse) {
                     </Accordion>
                   </div>
                 )}
-
                 <ModalEvent caisse={caisse} />
               </Card.Body>
             </Card>

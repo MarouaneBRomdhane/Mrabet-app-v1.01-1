@@ -37,11 +37,9 @@ const ModalEvent = ({ caisse }) => {
       TPEs: [...caisse.TPEs],
     };
 
-    disptach(updateCaisseEvent(caisse._id, updatedCaisse))
-      .then(() => {
-        handleClose();
-      })
-      .catch((error) => {});
+    disptach(updateCaisseEvent(caisse._id, updatedCaisse)).then(() => {
+      handleClose();
+    });
   };
 
   const handleSingleCheque = () => {
@@ -73,7 +71,7 @@ const ModalEvent = ({ caisse }) => {
   return (
     <div>
       {/* button to open modal */}
-      <Button onClick={handleShow} className="validation-btn-caisse1">
+      <Button onClick={handleShow} className="BTN">
         Ajouter Evenement
       </Button>
 
@@ -178,10 +176,7 @@ const ModalEvent = ({ caisse }) => {
 
                 {/* Button on the same line to add signle CHEQUE statement*/}
                 <Col md={2} sm={2} ml={1} className="d-flex align-items-center">
-                  <Button
-                    className="validation-btn-add-chequeandtpe-modal"
-                    onClick={handleSingleCheque}
-                  >
+                  <Button className="BTN-CHQTPE" onClick={handleSingleCheque}>
                     Ajouter
                   </Button>
                 </Col>
@@ -289,10 +284,7 @@ const ModalEvent = ({ caisse }) => {
                 </Form.Label>
                 {/* Button on the same line to add signle TPE statement*/}
                 <Col md={2} sm={2} className="d-flex align-items-center">
-                  <Button
-                    className="validation-btn-add-chequeandtpe-modal"
-                    onClick={handleSingleTpe}
-                  >
+                  <Button className="BTN-CHQTPE" onClick={handleSingleTpe}>
                     Ajouter
                   </Button>
                 </Col>
@@ -382,10 +374,7 @@ const ModalEvent = ({ caisse }) => {
 
         <Modal.Footer style={{ backgroundColor: "rgba(0, 126, 127, 0.75)" }}>
           {/* boutton pour valider la journée */}
-          <Button
-            className="sauvegarde-btn-add-chequeandtpe-modal"
-            onClick={handleUpdateCaisseEvent}
-          >
+          <Button className="BTN" onClick={handleUpdateCaisseEvent}>
             Sauvegareder
           </Button>
         </Modal.Footer>

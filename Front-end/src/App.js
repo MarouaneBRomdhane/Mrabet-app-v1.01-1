@@ -3,7 +3,6 @@ import "./BackgroundStyle.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Caisse1 from "./Components/Caisse1";
 import Login from "./Components/Login";
-import "./Components/ComponentStyle.css";
 import { Route, Routes } from "react-router-dom";
 import Economa from "./Components/Economa";
 import "./App.css";

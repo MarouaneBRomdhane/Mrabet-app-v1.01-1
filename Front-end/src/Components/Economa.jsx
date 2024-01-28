@@ -17,7 +17,7 @@ function Economa() {
 
   return (
     <>
-      <Row style={{ display: "flex", maxWidth: "1940px" }}>
+      <Row style={{ display: "flex" }}>
         <Col className="col-5">
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Card
@@ -62,7 +62,7 @@ function Economa() {
                           marginTop: "auto",
                           fontSize: "30px",
                           fontWeight: "500",
-                          width: "48%",
+                          width: "50%",
                           color: "#FFF7D6",
                           marginLeft: "10px",
                         }}
@@ -75,7 +75,7 @@ function Economa() {
                           marginTop: "auto",
                           fontSize: "30px",
                           fontWeight: "600",
-                          // width: "50%",
+                          width: "10%",
                           color: "#FFF7D6",
                         }}
                         className="divtextmta3lesproduit"

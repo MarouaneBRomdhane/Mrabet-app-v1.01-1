@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
@@ -15,6 +15,8 @@ const AddProduct = () => {
   const [Unity, setUnity] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
 
+  const [temporaryProduct, setTemporaryProduct] = useState([]);
+
   const dispatch = useDispatch();
 
   const product = useSelector((state) => state.Products.products);
@@ -22,25 +24,38 @@ const AddProduct = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleAddProduct = () => {
+  const addSingleProduct = () => {
     // Condition t'obligi el user bech i3abi les state el kol
+
     if (!Name || !Price || !Quantity) {
       alert("Please fill in all the fields.");
       return;
     }
-    const newProduct = {
+    const newTemporaryProduct = {
       Name: Name,
       Quantity: Quantity,
       Price: Price,
-      Facture: Facture,
       Unity: selectedOption,
     };
+    setTemporaryProduct([...temporaryProduct, newTemporaryProduct]);
+    setName("");
+    setQuantity(0);
+    setPrice(0);
+  };
+
+  const handleAddProduct = () => {
+    const newProduct = {
+      Facture: Facture,
+      Product: temporaryProduct,
+    };
+
     dispatch(addProducts(newProduct));
-    handleClose();
     setName("");
     setQuantity(0);
     setPrice(0);
     setFacture("");
+    setTemporaryProduct([]);
+    handleClose();
   };
 
   const handleImageChange = (event) => {
@@ -50,26 +65,9 @@ const AddProduct = () => {
       const reader = new FileReader();
 
       reader.onload = (e) => {
-        const img = new Image();
-        img.src = e.target.result;
-
-        img.onload = () => {
-          const canvas = document.createElement("canvas");
-          const ctx = canvas.getContext("2d");
-
-          // Set the canvas dimensions to the image dimensions
-          canvas.width = img.width;
-          canvas.height = img.height;
-
-          // Draw the image onto the canvas
-          ctx.drawImage(img, 0, 0);
-
-          // Convert the canvas content to a data URI with aggressive compression (adjust as needed)
-          const dataUri = canvas.toDataURL("image/jpeg", 0.6);
-
-          setFacture(dataUri);
-          console.log(dataUri);
-        };
+        const dataUri = e.target.result;
+        setFacture(dataUri);
+        console.log(dataUri);
       };
 
       reader.readAsDataURL(file);
@@ -93,6 +91,26 @@ const AddProduct = () => {
         </Modal.Header>
         <Modal.Body style={{ backgroundColor: "rgba(0, 126, 127, 0.75)" }}>
           <Form>
+            {/* Uploader l'image scanner de la FACTURE*/}
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label
+                style={{
+                  color: "#FFF7D6",
+                  fontSize: "25px",
+                  marginTop: "10px",
+                }}
+              >
+                Facture
+              </Form.Label>
+              <Form.Control
+                onChange={(e) => handleImageChange(e)}
+                type="file"
+                placeholder="Inserer le montant du ticket de caisse"
+                autoFocus
+                style={{ marginTop: "-10px" }}
+                accept="image/*"
+              />
+            </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label style={{ color: "#FFF7D6", fontSize: "25px" }}>
                 Nom du produit
@@ -143,26 +161,65 @@ const AddProduct = () => {
               />
             </Form.Group>
 
-            {/* Uploader les image scanner des ticket de caisse */}
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label
-                style={{
-                  color: "#FFF7D6",
-                  fontSize: "25px",
-                  marginTop: "10px",
-                }}
-              >
-                Ticket de caisse
-              </Form.Label>
-              <Form.Control
-                type="file"
-                placeholder="Inserer le montant du ticket de caisse"
-                autoFocus
-                style={{ marginTop: "-10px" }}
-                value={Facture}
-                onChange={(e) => handleImageChange(e)}
-              />
-            </Form.Group>
+            {/* Button on the same line to add signle PRODUCT */}
+
+            <Button
+              className="BTN-CHQTPE"
+              onClick={addSingleProduct}
+              style={{ marginLeft: "375px", marginBottom: "20px" }}
+            >
+              Ajouter
+            </Button>
+
+            {/* Champs pour verifier les PRODUIT ajouter avant de valider l'ajout */}
+            <div style={{ height: "100px", overflow: "auto" }}>
+              {temporaryProduct.map((product) => (
+                <div
+                  key={product._id}
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    marginBottom: "8px",
+                    borderBottom: "1px solid #FFF7D6",
+                    paddingBottom: "5px",
+                  }}
+                >
+                  <div
+                    style={{
+                      marginRight: "5px",
+                      marginTop: "-2px",
+                      fontWeight: "bold",
+                      fontSize: "16px",
+                      width: "180px",
+                    }}
+                  >
+                    {product.Name}
+                  </div>
+                  <div
+                    style={{
+                      marginTop: "-2px",
+                      marginRight: "5px",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                      width: "150px",
+                    }}
+                  >
+                    {product.Quantity}
+                    {product.Unity}
+                  </div>{" "}
+                  <div
+                    style={{
+                      marginTop: "-2px",
+                      marginRight: "5px",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {product.Price}dt
+                  </div>
+                </div>
+              ))}
+            </div>
           </Form>
         </Modal.Body>
 

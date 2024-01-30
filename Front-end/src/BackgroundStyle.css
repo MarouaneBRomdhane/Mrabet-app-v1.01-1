@@ -6,14 +6,12 @@ body {
 
   margin: 0; /* Remove default body margin */
   padding: 0; /* Remove default body padding */
-  background-attachment: fixed; 
+  background-attachment: fixed;
 }
 body,
 html {
   height: 100%;
+  width: 99.5%;
   margin: 0;
   padding: 0;
 }
-
-
-

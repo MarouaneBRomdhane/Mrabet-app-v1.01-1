@@ -5,10 +5,11 @@ import Modal1 from "./Modal1";
 import { useDispatch, useSelector } from "react-redux";
 import { getCaisses1 } from "../Redux/Actions/Caisse1_Action";
 import { CardText, Row } from "react-bootstrap";
-import CustomNavBar from "./Navbar";
+
 import Visualizer from "./Visualizer";
 import CaisseEvent from "./CaisseEvent";
 import BankCaisse from "./BankCaisse";
+import Navbar from "./Navbar";
 
 function Caisse1(caisse) {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ function Caisse1(caisse) {
   return (
     <>
       <div>
-        <CustomNavBar />
+        <Navbar />
       </div>
 
       <div

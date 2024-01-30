@@ -10,7 +10,7 @@ const app = express();
 const port = 8000;
 
 Connectdb();
-app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
 app.use(
   cors({
     origin: "http://localhost:3000",

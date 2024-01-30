@@ -1,42 +1,52 @@
+import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getCaisses1 } from "../Redux/Actions/Caisse1_Action";
+import { getCaissesEvent } from "../Redux/Actions/CaisseEvent_Actions";
+import { getBank_Caisses } from "../Redux/Actions/Bank_Caisses_Action";
+import BankCaisseModal from "./BankCaisseModal";
+import Economa from "./Economa";
+import { CardText, Row } from "react-bootstrap";
 
-function Visualizer() {
+function Visualizer({ totalSum }) {
   const dispatch = useDispatch();
+  const caisses1 = useSelector((state) => state.caisses1.caisses);
+  const caissesEvent = useSelector((state) => state.caissesEvent.caisses);
+  const bankCaisses = useSelector((state) => state.BankCaisses.BankCaisses);
+  const [totalSumFromEconoma, setTotalSumFromEconoma] = useState(0);
+
   useEffect(() => {
     dispatch(getCaisses1());
+    dispatch(getCaissesEvent());
+    dispatch(getBank_Caisses());
   }, [dispatch]);
 
-  const Caisses = useSelector((state) => state.caisses1.caisses);
-  console.log(Caisses);
-
-  const totalTPETransaction = Caisses.reduce((sum, caisse) => {
-    if (caisse.TPEs.length > 0) {
-      const tpeSum = caisse.TPEs.reduce(
-        (acc, tpe) => acc + tpe.MontantDeTransaction,
-        0
-      );
-      return sum + tpeSum;
+  // Calculate Liquide disponible en caisse
+  let TotalEspece = caisses1.reduce((sum, caisse) => {
+    if (caisse.Liquide && caisse.Liquide.montantLiquide !== undefined) {
+      return sum + caisse.Liquide.montantLiquide;
     } else {
       return sum;
     }
   }, 0);
 
-  const TotalCheques = Caisses.reduce((sum, caisse) => {
-    if (caisse.Cheques.length > 0) {
-      const chequeSum = caisse.Cheques.reduce(
-        (acc, cheque) => acc + cheque.MontantDeCheque,
-        0
-      );
-      return sum + chequeSum;
-    } else {
-      return sum;
+  caissesEvent.forEach((caisse) => {
+    if (caisse.Liquide && caisse.Liquide.montantLiquide !== undefined) {
+      TotalEspece += caisse.Liquide.montantLiquide;
     }
-  }, 0);
+  });
 
-  const TotalRecette = Caisses.reduce((sum, caisse) => {
+  bankCaisses.forEach((caisse) => {
+    if (caisse.Montant !== undefined) {
+      TotalEspece += caisse.Montant;
+    }
+  });
+
+  // Subtract totalSumFromEconoma from Liquide disponible en caisse
+  let LiquideDisponibleEnCaisse = TotalEspece - totalSum;
+
+  // Calculate Total des recette de caisse
+  let TotalRecette = caisses1.reduce((sum, caisse) => {
     if (caisse.Recette.length > 0) {
       const recetteSum = caisse.Recette.reduce(
         (acc, recette) => acc + recette.montant,
@@ -48,13 +58,64 @@ function Visualizer() {
     }
   }, 0);
 
-  const TotalEspece = Caisses.reduce((sum, caisse) => {
-    if (caisse.Liquide && caisse.Liquide.montantLiquide !== undefined) {
-      return sum + caisse.Liquide.montantLiquide;
+  caissesEvent.forEach((caisse) => {
+    if (caisse.Recette.length > 0) {
+      TotalRecette += caisse.Recette.reduce(
+        (acc, recette) => acc + recette.montant,
+        0
+      );
+    }
+  });
+
+  // Calculate Total des Cheques
+  let TotalCheques = caisses1.reduce((sum, caisse) => {
+    if (caisse.Cheques.length > 0) {
+      const chequeSum = caisse.Cheques.reduce(
+        (acc, cheque) => acc + cheque.MontantDeCheque,
+        0
+      );
+      return sum + chequeSum;
     } else {
       return sum;
     }
   }, 0);
+
+  caissesEvent.forEach((caisse) => {
+    if (caisse.Cheques.length > 0) {
+      TotalCheques += caisse.Cheques.reduce(
+        (acc, cheque) => acc + cheque.MontantDeCheque,
+        0
+      );
+    }
+  });
+
+  // Calculate Total des transaction TPE
+  let totalTPETransaction = caisses1.reduce((sum, caisse) => {
+    if (caisse.TPEs.length > 0) {
+      const tpeSum = caisse.TPEs.reduce(
+        (acc, tpe) => acc + tpe.MontantDeTransaction,
+        0
+      );
+      return sum + tpeSum;
+    } else {
+      return sum;
+    }
+  }, 0);
+
+  caissesEvent.forEach((caisse) => {
+    if (caisse.TPEs.length > 0) {
+      totalTPETransaction += caisse.TPEs.reduce(
+        (acc, tpe) => acc + tpe.MontantDeTransaction,
+        0
+      );
+    }
+  });
+
+  useEffect(() => {
+    // Logic to get totalSum from Economa component
+    const newTotalSumFromEconoma = totalSum; // Assuming totalSum is a number
+    setTotalSumFromEconoma(newTotalSumFromEconoma);
+  }, [totalSum, caisses1, caissesEvent, bankCaisses]);
 
   return (
     <div
@@ -141,7 +202,7 @@ function Visualizer() {
             }}
           >
             {" "}
-            <h1>{TotalEspece}</h1>
+            <h1>{LiquideDisponibleEnCaisse}</h1>
           </Card.Text>
         </Card.Body>
       </Card>

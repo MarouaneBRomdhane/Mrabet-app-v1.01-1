@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts } from "../Redux/Actions/Achat_Action";
-import { Col, Row, Carousel, Modal } from "react-bootstrap"; // Import Carousel and Modal from react-bootstrap
+import { Col, Row, Carousel, Modal } from "react-bootstrap";
 import Visualizer from "./Visualizer";
 import AddProduct from "./AddProduct";
 import EconomaProduct from "./EconomaProduct";
@@ -10,11 +10,13 @@ import Navbar from "./Navbar";
 
 function Economa() {
   const dispatch = useDispatch();
-  const Caisses = useSelector((state) => state.caisses1.caisses);
+  const caisses = useSelector((state) => state.caisses1.caisses);
+  const [totalSum, setTotalSum] = useState(0);
 
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
+
   const products = useSelector((state) => state.Products.products);
 
   const [showModal, setShowModal] = useState(false);
@@ -27,11 +29,21 @@ function Economa() {
   };
 
   // Calculate the sum of all valid prices in the nested structure
-  const totalSum = products.reduce((sum, product) => {
-    // Access the nested Product array and sum the Prices
-    const productPrices = product.Product.map((p) => parseFloat(p.Price) || 0);
-    return sum + productPrices.reduce((priceSum, price) => priceSum + price, 0);
-  }, 0);
+  const calculateTotalSum = () => {
+    const newTotalSum = products.reduce((sum, product) => {
+      const productPrices = product.Product.map(
+        (p) => parseFloat(p.Price) || 0
+      );
+      return (
+        sum + productPrices.reduce((priceSum, price) => priceSum + price, 0)
+      );
+    }, 0);
+    setTotalSum(newTotalSum);
+  };
+
+  useEffect(() => {
+    calculateTotalSum();
+  }, [products]);
 
   return (
     <>
@@ -68,7 +80,7 @@ function Economa() {
                 <AddProduct />
                 <div style={{ marginTop: "25px" }}>
                   {products.map((product) => (
-                    <EconomaProduct product={product} />
+                    <EconomaProduct product={product} key={product._id} />
                   ))}
                 </div>
               </Card.Body>
@@ -77,10 +89,9 @@ function Economa() {
         </Col>
         <Col className="col-6">
           <div style={{ marginTop: "103px" }}>
-            <Visualizer />
+            <Visualizer totalSum={totalSum} />
           </div>
           <div style={{ marginTop: "10px" }}>
-            {/* Add the Carousel here */}
             <Carousel>
               {products.map((product) => (
                 <Carousel.Item key={product._id}>
@@ -89,8 +100,8 @@ function Economa() {
                     src={product.Facture}
                     onClick={() => handleImageClick(product.Facture)}
                     style={{ cursor: "pointer" }}
+                    alt={`Product ${product._id}`}
                   />
-                  {/* You can add additional content for each carousel item if needed */}
                   <Carousel.Caption>
                     <h3>{product.Name}</h3>
                   </Carousel.Caption>
@@ -104,7 +115,7 @@ function Economa() {
         show={showModal}
         onHide={() => setShowModal(false)}
         size="xl"
-        dialogClassName="modal-90w" // Custom class for 90% width
+        dialogClassName="modal-90w"
       >
         <Modal.Body>
           <img

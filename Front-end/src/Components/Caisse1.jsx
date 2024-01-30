@@ -247,7 +247,7 @@ function Caisse1(caisse) {
           justifyContent: "center",
         }}
       >
-        <div style={{ display: "flex", gap: "57px" }}>
+        <div style={{ display: "flex", gap: "57px", marginBottom: "20px" }}>
           <CaisseEvent />
           <BankCaisse />
         </div>

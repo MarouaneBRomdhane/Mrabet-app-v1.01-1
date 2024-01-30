@@ -53,15 +53,17 @@ function CaisseEvent(caisse) {
                 >
                   Recette:
                 </Card.Text>
-                <CardText
-                  style={{
-                    color: "#FFF7D6",
-                    fontSize: "25px",
-                    marginLeft: "10px",
-                  }}
-                >
-                  {caisse.Recette.montant}
-                </CardText>
+                {caisse.Recette && caisse.Recette.length > 0 && (
+                  <CardText
+                    style={{
+                      color: "#FFF7D6",
+                      fontSize: "25px",
+                      marginLeft: "10px",
+                    }}
+                  >
+                    {caisse.Recette[0].montant}
+                  </CardText>
+                )}
               </div>
               {/* RECETTE trander ki luser iselecti fel modal Espece comme type donc el valeur twali >0 */}
               {caisse.Liquide.montantLiquide > 0 && (

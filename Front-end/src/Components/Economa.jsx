@@ -16,7 +16,7 @@ function Economa() {
     dispatch(getProducts());
   }, [dispatch]);
   const products = useSelector((state) => state.Products.products);
-  console.log(products);
+
   const [showModal, setShowModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -25,6 +25,13 @@ function Economa() {
     setSelectedImage(imageURL);
     setShowModal(true);
   };
+
+  // Calculate the sum of all valid prices in the nested structure
+  const totalSum = products.reduce((sum, product) => {
+    // Access the nested Product array and sum the Prices
+    const productPrices = product.Product.map((p) => parseFloat(p.Price) || 0);
+    return sum + productPrices.reduce((priceSum, price) => priceSum + price, 0);
+  }, 0);
 
   return (
     <>
@@ -55,6 +62,8 @@ function Economa() {
                   }}
                 >
                   Liste des achats
+                  <br />
+                  Total: {totalSum}
                 </Card.Title>
                 <AddProduct />
                 <div style={{ marginTop: "25px" }}>

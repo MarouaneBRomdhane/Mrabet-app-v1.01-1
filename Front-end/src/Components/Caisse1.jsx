@@ -21,10 +21,7 @@ function Caisse1(caisse) {
 
   return (
     <>
-      <div>
-        <Navbar />
-      </div>
-
+      <Navbar />
       <div
         style={{
           display: "flex",
@@ -72,15 +69,17 @@ function Caisse1(caisse) {
                   >
                     Recette:
                   </Card.Text>
-                  <CardText
-                    style={{
-                      color: "#FFF7D6",
-                      fontSize: "25px",
-                      marginLeft: "10px",
-                    }}
-                  >
-                    {caisse.Recette[0].montant}
-                  </CardText>
+                  {caisse.Recette && caisse.Recette.length > 0 && (
+                    <CardText
+                      style={{
+                        color: "#FFF7D6",
+                        fontSize: "25px",
+                        marginLeft: "10px",
+                      }}
+                    >
+                      {caisse.Recette[0].montant}
+                    </CardText>
+                  )}
                 </div>
                 <div style={{ display: "flex" }}>
                   <Card.Text

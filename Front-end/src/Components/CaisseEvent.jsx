@@ -60,7 +60,7 @@ function CaisseEvent(caisse) {
                     marginLeft: "10px",
                   }}
                 >
-                  {caisse.Recette[0].montant}
+                  {caisse.Recette.montant}
                 </CardText>
               </div>
               {/* RECETTE trander ki luser iselecti fel modal Espece comme type donc el valeur twali >0 */}

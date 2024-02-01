@@ -179,7 +179,7 @@ function Visualizer({ totalSum }) {
             }}
           >
             {" "}
-            <h1>{TotalRecette}</h1>
+            <h1 id="totalRecetteValue">{TotalRecette}</h1>
           </Card.Text>
         </Card.Body>
       </Card>
@@ -218,7 +218,7 @@ function Visualizer({ totalSum }) {
             }}
           >
             {" "}
-            <h1>{LiquideDisponibleEnCaisse}</h1>
+            <h1 id="liquideDisponibleValue">{LiquideDisponibleEnCaisse}</h1>
           </Card.Text>
         </Card.Body>
       </Card>
@@ -257,7 +257,7 @@ function Visualizer({ totalSum }) {
             }}
           >
             {" "}
-            <h1>{TotalCheques}</h1>
+            <h1 id="totalChequesValue">{TotalCheques}</h1>
           </Card.Text>
         </Card.Body>
       </Card>
@@ -296,7 +296,7 @@ function Visualizer({ totalSum }) {
             }}
           >
             {" "}
-            <h1>{totalTPETransaction}</h1>
+            <h1 id="totalTPETransactionValue">{totalTPETransaction}</h1>
           </Card.Text>
         </Card.Body>
       </Card>

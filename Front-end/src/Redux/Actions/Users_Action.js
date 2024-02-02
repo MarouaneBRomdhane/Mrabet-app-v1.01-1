@@ -1,5 +1,6 @@
 import axios from "axios";
 import { GETCURRENT, LOGIN, LOGOUT } from "../ActionsTypes/User_action_type";
+import { alertError } from "../ActionsTypes/ActiontypeError";
 
 export const Login_action = (data, Navigate) => async (dispatch) => {
   try {
@@ -8,7 +9,9 @@ export const Login_action = (data, Navigate) => async (dispatch) => {
       .then((res) => dispatch({ type: LOGIN, payload: res.data }));
     Navigate("/Caisses1");
   } catch (error) {
-    console.log(error);
+    error.response.data.errors.forEach((e) => {
+      dispatch(alertError(e.msg));
+    });
   }
 };
 

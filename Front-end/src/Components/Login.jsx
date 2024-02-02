@@ -67,7 +67,9 @@ const Login = () => {
             </Form.Group>
           </Form>
           {errors.map((e) => (
-            <span style={{ color: "#a00a0a" }}>{e.msg}</span>
+            <span key={e.msg} style={{ color: "#a00a0a" }}>
+              {e.msg}
+            </span>
           ))}
           <Button className="BTN-LOGIN" onClick={handleLogin}>
             Se connecter

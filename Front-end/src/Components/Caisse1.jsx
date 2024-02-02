@@ -18,6 +18,7 @@ function Caisse1(caisse) {
   }, [dispatch]);
 
   const Caisses = useSelector((state) => state.caisses1.caisses);
+  const products = useSelector((state) => state.Products.products);
 
   return (
     <>

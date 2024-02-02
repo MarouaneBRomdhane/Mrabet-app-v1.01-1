@@ -38,7 +38,7 @@ function Economa() {
         sum + productPrices.reduce((priceSum, price) => priceSum + price, 0)
       );
     }, 0);
-    setTotalSum(newTotalSum);
+    setTotalSum(newTotalSum.toFixed(3));
   };
 
   useEffect(() => {

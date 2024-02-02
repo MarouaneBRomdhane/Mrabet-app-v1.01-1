@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Login_action } from "../Redux/Actions/Users_Action";
 
@@ -15,6 +15,8 @@ const Login = () => {
   const handleLogin = () => {
     dispatch(Login_action({ Name, Password }, Navigate));
   };
+  const errors = useSelector((state) => state.errorReducer);
+  console.log(errors);
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Card
@@ -64,6 +66,9 @@ const Login = () => {
               />
             </Form.Group>
           </Form>
+          {errors.map((e) => (
+            <span style={{ color: "#a00a0a" }}>{e.msg}</span>
+          ))}
           <Button className="BTN-LOGIN" onClick={handleLogin}>
             Se connecter
           </Button>

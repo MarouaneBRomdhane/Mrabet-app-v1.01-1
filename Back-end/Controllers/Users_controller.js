@@ -34,11 +34,11 @@ exports.Login = async (req, res) => {
     if (!found) {
       res
         .status(400)
-        .send({ msg: "L'utilisateur n'existe pas dans la base de données!!" });
+        .send({ errors: [{ msg: "nom d'utilisateur incorrect" }] });
     } else {
       const ComparedPassword = bcrypt.compareSync(Password, found.Password);
       if (!ComparedPassword) {
-        res.status(400).send({ msg: "mot de passe incorrect!!" });
+        res.status(400).send({ errors: [{ msg: "mot de passe incorrect!!" }] });
       } else {
         const SecretKey = "160592050199271021";
         const Token = jwt.sign({ id: found._id }, SecretKey);
@@ -51,4 +51,7 @@ exports.Login = async (req, res) => {
     res.status(500).send(error);
     if (error) throw error;
   }
+};
+exports.GetCurrent = (req, res) => {
+  res.status(200).send({ user: req.user });
 };

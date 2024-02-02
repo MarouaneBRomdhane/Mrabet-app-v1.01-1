@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN, LOGOUT } from "../ActionsTypes/User_action_type";
+import { GETCURRENT, LOGIN, LOGOUT } from "../ActionsTypes/User_action_type";
 
 export const Login_action = (data, Navigate) => async (dispatch) => {
   try {
@@ -17,4 +17,15 @@ export const Log_out = (Navigate) => {
   return {
     type: LOGOUT,
   };
+};
+
+export const getCurrent = () => async (dispatch) => {
+  const config = {
+    headers: { token: localStorage.getItem("token") },
+  };
+  try {
+    await axios
+      .get("http://localhost:8000/user/getCurrentUser", config)
+      .then((res) => dispatch({ type: GETCURRENT, payload: res.data }));
+  } catch (error) {}
 };

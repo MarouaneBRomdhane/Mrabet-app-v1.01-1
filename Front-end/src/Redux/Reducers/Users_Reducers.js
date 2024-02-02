@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT } from "../ActionsTypes/User_action_type";
+import { GETCURRENT, LOGIN, LOGOUT } from "../ActionsTypes/User_action_type";
 
 const initialState = { user: {} };
 
@@ -10,6 +10,8 @@ export const Users_reducer = (state = initialState, { type, payload }) => {
     case LOGOUT:
       localStorage.removeItem("Token");
       return { ...state, user: {} };
+    case GETCURRENT:
+      localStorage.setItem();
     default:
       return state;
   }

@@ -38,7 +38,7 @@ export default function Navbar() {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A4 Format Document</title>
+  <title>Resumé de la journée</title>
   <style>
     @media print {
       body {
@@ -66,11 +66,11 @@ export default function Navbar() {
       .card {
         width: 160px; /* Adjust card width */
         height: 105px;
-        background-color: rgba(0, 126, 127, 0.75);
+        border: solid 1px #00273C;
         border-radius: 10px;
         margin-right: auto; /* Adjust margin between cards */
         padding: 10px;
-        color: #fff7d6;
+        color: #00273C;
         font-size: 18px;
         font-weight: bold;
         display: flex;
@@ -86,11 +86,12 @@ export default function Navbar() {
 
       /* New styles for BankCaisse Montant */
       .bank-caisse-montant-card {
-        width: 350px; /* Two card widths + gap */
-        background-color: rgba(0, 126, 127, 0.75);
+        width: 350px; 
+        
+        border : solid 1px #00273C;
         border-radius: 10px;
         padding: 10px;
-        margin-right: auto; /* Adjust margin between cards */
+        margin-right: auto; 
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -100,23 +101,24 @@ export default function Navbar() {
 
       .bank-caisse-montant {
         font-size: 32px; /* Adjust font size */
-        color: #fff7d6;
+        color: #00273C;
         font-weight: bold;
-        margin-top: 10px; /* Adjust margin */
+        margin-top: -20px;
+        margin-bottom: -10px; 
         text-align: center;
       }
 
       .bank-caisse-title {
         font-size: 20px; /* Adjust title font size */
-        color: #fff7d6; 
+        color: #00273C; 
         font-weight: bold;
         text-align: center;
-        margin-top: 20px; /* Adjust title margin */
+        margin-top: 10px; /* Adjust title margin */
       }
 
       .product-list-card {
         width: 700px; /* Two card widths + gap */
-        background-color: rgba(0, 126, 127, 0.75);
+        border: solid 1px #00273C;
         border-radius: 10px;
         padding: 10px;
         margin-right: auto;
@@ -133,7 +135,7 @@ export default function Navbar() {
 
       .product-list-title {
         font-size: 20px; /* Adjust title font size */
-        color: #fff7d6; 
+        color: #00273C; 
         font-weight: bold;
         text-align: center;
         margin-top: 10px; /* Adjust title margin */
@@ -143,10 +145,10 @@ export default function Navbar() {
       .product-list-item {
         display: flex;
         font-size: 16px; /* Adjust font size */
-        color: #fff7d6;
+        color: ##00273C;
         margin-top: 5px; /* Adjust margin */
-        text-align: center;
-        border: solid 0.5px  #fff7d6 ;
+        text-align: start;
+        border: solid 0.5px  #00273C ;
         border-radius: 5px;
         padding:3px;
         box-sizing: border-box;
@@ -158,7 +160,7 @@ export default function Navbar() {
 </head>
 
 <body>
-  <!-- Row for Existing Content -->
+  <!-- Row for Visualizer -->
   <div class="content">
     <div class="card">
       <div>Total des recettes</div>
@@ -184,7 +186,7 @@ export default function Navbar() {
       (caisse) => `
         <div class="card">
           <div>${caisse.Title}</div>
-          <div>
+          <div style="margin-bottom:-20px;">
             ${
               caisse.Recette && caisse.Recette.length > 0
                 ? caisse.Recette[0].montant
@@ -229,10 +231,10 @@ export default function Navbar() {
           (product) => `
             ${product.Product.map(
               (item) => `
-                <div class="product-list-item">
-                  <div>${item.Name}</div>
-                  <div>Qte: ${item.Quantity}${item.Unity}</div>
-                  <div>Prix: ${item.Price}Dt</div>
+                <div class="product-list-item ">
+                  <div style="margin-left:10px;width:30%;">${item.Name}</div>
+                  <div style="margin-left:20px;width:30%;"">Qte: ${item.Quantity}${item.Unity}</div>
+                  <div style="margin-left:20px;width:30%;">Prix: ${item.Price}Dt</div>
                 </div>
               `
             ).join("")}
@@ -246,9 +248,6 @@ export default function Navbar() {
 </body>
 
 </html>
-
-
-
 
     
     `;
@@ -346,7 +345,20 @@ export default function Navbar() {
                 </div>
 
                 {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-9  ">
+                <Menu as="div" className="relative ml-9 flex mt2.5 ">
+                  <a
+                    style={{
+                      textDecoration: "none",
+                      fontFamily: "Courier New",
+                    }}
+                    href="#"
+                    id="navbar-text"
+                    className=" block px-4 py-2 text-sm  mt-2.5"
+                  >
+                    <h4>
+                      <ImPrinter onClick={handlePrint} title="Print Resume" />
+                    </h4>
+                  </a>
                   <a
                     style={{
                       textDecoration: "none",
@@ -363,13 +375,6 @@ export default function Navbar() {
                   </a>
                 </Menu>
               </div>
-
-              {/* Print icon for printing resume */}
-              <ImPrinter
-                onClick={handlePrint}
-                className="block h-6 w-6 ml-4 cursor-pointer"
-                title="Print Resume"
-              />
             </div>
           </div>
         </>

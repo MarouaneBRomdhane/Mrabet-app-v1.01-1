@@ -16,6 +16,7 @@ const Modal1 = ({ caisse }) => {
   const [MontantDeCheque, setMontantDeCheque] = useState(0);
   const [NumeroDeTransaction, setNumeroDeTransaction] = useState(0);
   const [MontantDeTransaction, setMontantDeTransaction] = useState(0);
+  const [Facture, setFacture] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -26,13 +27,14 @@ const Modal1 = ({ caisse }) => {
 
   const Cheques = Caisses.find((e) => e._id === caisse._id).Cheques;
   const Tpes = Caisses.find((e) => e._id === caisse._id).TPEs;
-
+  const Imge = Caisses.find((e) => e._id === caisse._id).TicketDeCaisse;
   const handleUpdateCaisse1 = () => {
     const updatedCaisse = {
       Recette: [{ montant }],
       Liquide: { montantLiquide },
       Cheques: [...caisse.Cheques],
       TPEs: [...caisse.TPEs],
+      TicketDeCaisse: [...caisse.Image],
     };
 
     disptach(updateCaisse1(caisse._id, updatedCaisse))
@@ -65,6 +67,21 @@ const Modal1 = ({ caisse }) => {
       );
       setMontantDeTransaction(0);
       setNumeroDeTransaction(0);
+    }
+  };
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const dataUri = e.target.result;
+        setFacture(dataUri);
+        console.log(dataUri);
+      };
+
+      reader.readAsDataURL(file);
     }
   };
 
@@ -333,10 +350,12 @@ const Modal1 = ({ caisse }) => {
                 Ticket de caisse
               </Form.Label>
               <Form.Control
+                onChange={(e) => handleImageChange(e)}
                 type="file"
                 placeholder="Inserer le montant du ticket de caisse"
                 autoFocus
                 style={{ marginTop: "-10px" }}
+                accept="image/*"
               />
             </Form.Group>
           </Row>
